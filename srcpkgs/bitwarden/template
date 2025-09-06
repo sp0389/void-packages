@@ -1,0 +1,30 @@
+# Template file for 'bitwarden'
+pkgname=bitwarden
+version=2025.8.2
+revision=1
+hostmakedepends="bsdtar binutils desktop-file-utils wget"
+short_desc="Secure Password Manager"
+maintainer="Graeme Bevins <seventh.theory@protonmail.me>"
+license="GPL-3.0-or-later"
+homepage="https://bitwarden.com"
+distfiles="https://github.com/bitwarden/clients/releases/download/desktop-v${version}/Bitwarden-${version}-amd64.deb"
+checksum="5b7d8e27cf41b74854d3331b43b123c8d8b8d4847c7cf7892ab2e2175ce7acc1"
+
+do_install() {
+
+  # Download the .deb
+	wget -O "Bitwarden-${version}-amd64.deb" \
+		"https://github.com/bitwarden/clients/releases/download/desktop-v${version}/Bitwarden-${version}-amd64.deb"
+
+  # Extract the .deb into control/data files
+	ar x "Bitwarden-${version}-amd64.deb"
+
+  # Extract program files into DESTDIR
+	bsdtar xf data.tar.xz -C "${DESTDIR}"
+
+  # Patch .desktop file to ensure Exec points correctly
+	if [ -f "${DESTDIR}/usr/share/applications/Bitwarden.desktop" ]; then
+		desktop-file-edit --set-key=Exec --set-value="/usr/bin/Bitwarden %U" \
+			"${DESTDIR}/usr/share/applications/Bitwarden.desktop"
+	fi
+}
