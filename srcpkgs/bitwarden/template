@@ -1,6 +1,6 @@
 # Template file for 'bitwarden'
 pkgname=bitwarden
-version=2025.9.0
+version=2025.10.0
 revision=1
 hostmakedepends="bsdtar binutils desktop-file-utils wget"
 short_desc="Secure Password Manager"
@@ -8,7 +8,7 @@ maintainer="Graeme Bevins <seventh.theory@protonmail.me>"
 license="GPL-3.0-or-later"
 homepage="https://bitwarden.com"
 distfiles="https://github.com/bitwarden/clients/releases/download/desktop-v${version}/Bitwarden-${version}-amd64.deb"
-checksum="1632c74cea56c93f56f80d19fcddb88aa946a2f2477985ba11b819fa77de94ca"
+checksum="087bafae84e9dc5ee792e0933e5a7a485d427f1205f712329afc70d4c056ad3c"
 
 do_install() {
 
